@@ -118,6 +118,7 @@ def card_conv(x,r):
         d += dchar[x % r]
         x //= r
     return d[::-1]
+
 #16 条件満たし次第強制プログラムを強制終了させたいとき
 (計算量を大幅に減らすことができる)
 import sys
@@ -171,3 +172,19 @@ print(count)
 S = "1241359"
 print(S.find("8")) # -1　
 print(S.find("1",3)) #4 (第二引数でindex[3]から探索を始める)
+
+#22 素数抽出法(計算量を考慮すると10000くらいまでが限界)
+prime = []
+for i in range(2,10000):
+    count = 0
+    for j in range(2,i+1):
+        if i % j == 0:
+            count += 1
+    if count == 1:
+        prime.append(i)
+
+print(prime)
+print(len(prime))
+
+#23 10 * 10の行列を作る
+matrix = [[0] * n for i in range(n)]
