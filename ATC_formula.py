@@ -188,3 +188,13 @@ print(len(prime))
 
 #23 10 * 10の行列を作る
 matrix = [[0] * n for i in range(n)]
+
+#23 複数の集合を作り、さらにそのうち連結成分が最大の集合の個数を抽出する(BFSの一種)
+from networkx import *
+
+G = Graph()
+G.add_edges_from([(3,4)]) #3-4を生成
+G.add_edges_from([(3,5)]) #3-4-5を生成(5を追加しただけ)
+G.add_edges_from([(1,2)]) #1-2を生成
+print(len(max(connected_components(G), key=len)))
+# 1-2 or 3-4-5の連結成分の大きい方、3-4-5の個数"３"を答えに出す
