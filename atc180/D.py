@@ -1,37 +1,22 @@
-import sys
-# xは強さ、yは進化値、aは×、bは+
-x,y,a,b = map(int, input().split())
-accumilation = 0
-x1,x2 = 0,0
+#他人のコード
 
-while True:
+# x= 強さ、y = 進化のための経験値、a = * a、b = + b
+x,y,a,b = map(int,input().split())
+ans = 0
+for i in range(10**9):
 
-    x1 = (x * a)
-    x2 = (x + b)
-    x3 = min(x1, x2)
+    if x * a < b:
+        x *= a
+    else:
+        # divmod = 引数2つ与えて、商と余を得る関数
+        div,mod = divmod((y - x),b)
+        ans += div
+        if mod == 0:
+            ans -= 1
+        break
 
-    if x1 > x2:
-        x = x2
-        if y > x:
-            accumilation += 1
-            pass
-        else:
-            print(accumilation)
-            sys.exit()
-
-        while True:
-            x += x2
-            if y > x:
-                accumilation += 1
-                pass
-            else:
-                print(accumilation)
-                sys.exit()
-    x = x3
-
-    if y > x:
-        accumilation += 1
-        pass
-    else: break
-
-print(accumilation)
+    if x >= y:
+        break
+    #以下はif文に該当しようがしまいが、毎ターンカウント
+    ans += 1
+print(ans)
