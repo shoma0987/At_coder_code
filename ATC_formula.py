@@ -13,6 +13,10 @@ H, W, K = input().split()　#文字の場合
 A = [int(x) for x in input().split()]
 A = list(map(int, input().split()))
 
+H, W = map(int, input().split())
+mass = [input() for _ in range(H)] # ex: mass = ["shoma","yusuke"]
+# mass[1][1] = "u"  / mass[0][4] = "a"
+
 #連続したintを1文字づつlistに格納する方法(strに変形して打ち込む)
 A = 2244858
 B = list(str(A))
@@ -198,3 +202,29 @@ G.add_edges_from([(3,5)]) #3-4-5を生成(5を追加しただけ)
 G.add_edges_from([(1,2)]) #1-2を生成
 print(len(max(connected_components(G), key=len)))
 # 1-2 or 3-4-5の連結成分の大きい方、3-4-5の個数"３"を答えに出す
+
+#24 非常に最速で約数を全て列挙できる関数
+def make_divisors(n):
+    divisors = []
+    for i in range(1, int(n**0.5)+1):
+        if n % i == 0:
+            divisors.append(i)
+            if i != n // i:
+                divisors.append(n//i)
+
+    divisors.sort()
+    return divisors
+
+# 25  listの中にあってif文該当があるやつ全てのindexを列記する
+b = [2,3,45,3,5,3,2,45,3,2]
+r = [k for k, x in enumerate(b) if x == max(b)]
+print(r) # [2,7]
+
+# 26  アルファベットが与えられて、数字に変化させる
+alpha_num = lambda c: ord(c) - ord('a') + 1
+alpha_num("c") # 3
+
+# 27 Listの中にある、欲しい値のindexを入手する
+c = [2,4,2,1,54,5,3]
+cc = c.index(54) #4
+
