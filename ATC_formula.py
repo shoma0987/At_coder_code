@@ -8,10 +8,11 @@ for i in range(N):
 
 #2: 横にint型 or str型で複数inputをしたい時(2パターン)
 H, W, K = map(int, input().split()) #数字の場合
-H, W, K = input().split()　#文字の場合
+H, W, K = input().split() #文字の場合
 
 A = [int(x) for x in input().split()]
 A = list(map(int, input().split()))
+A = [list(map(int, input().split())) for i in range(n)]
 
 H, W = map(int, input().split())
 mass = [input() for _ in range(H)] # ex: mass = ["shoma","yusuke"]
@@ -228,3 +229,106 @@ alpha_num("c") # 3
 c = [2,4,2,1,54,5,3]
 cc = c.index(54) #4
 
+# 28 tupleとしてまとめて、list化
+p = [tuple(map(int, input().split())) for i in range(n)]
+ # p = [(1,2),(2,0),(3,4),(2,1)]
+
+#29 全探索できるやり方
+n = 5
+l = [1,2,3,4,5,6,7,8,9]
+d = []
+for i in range(n):
+    for j in range(i):
+        for k in range(j):
+            a = i
+            b = j
+            c = k
+            d.append((a,b,c))
+print(d)
+# [(2, 1, 0), (3, 1, 0), (3, 2, 0), (3, 2, 1),
+# (4, 1, 0), (4, 2, 0), (4, 2, 1), (4, 3, 0), (4, 3, 1), (4, 3, 2)]
+
+# 30 参照渡しの影響を受けないdeep copy
+import copy
+
+a = 10
+b = copy.deepcopy(a)
+b = 20
+print(a,b) # 10,20 となる
+
+# 31 strの連続した数字列を1つずつlistに格納
+N = input()
+
+x = []
+for i in range(0,len(N)):
+  x.append(int(N[i]))
+
+# 32  listの平均をとる
+from statistics import mean
+a = [1,5,2,4,5]
+mean(a) #3.4
+
+# 33 階段型の足し算関数
+def plusPlus(A): #Aにはinterのlist
+    sum = 0
+    addmax = 0
+    now = 0
+    ans = 0
+
+    for i in A:
+        sum += i
+        if (sum > addmax):
+            addmax = sum
+
+        if (now + addmax > ans):
+            ans = now + addmax
+
+        now += sum
+    return ans
+plusPlus([1,13,4,-5,3,2])
+
+# 34　permutaionを使いこなせ
+from itertools import permutations
+a = [1,2,3,4,5]
+perm = permutations(a,3) #このままprintしても<itertools.permutations object at 0x7fde2fa9ebd0>と表示されるだけ。
+perm_list =[]
+for i in perm:
+    perm_list.append(i) #もしlist型で出したければ、list(i)とする
+print(perm_list) # [(1,2,3),(1,2,4),,,,,(3,4,5)] tuple型ででくる
+
+# 35　combination を使いこなせ
+from itertools import combinations
+b = [1,2,3,4,5]
+comb = combinations(b,3)
+comb_list=[]
+for j in comb:
+    comb_list.append(j) #もしlist型で出したければ、list(i)とする
+print(comb_list) # [(1,2,3),(1,2,4),,,,,(3,4,5)] tuple型ででくる
+
+# 36 階乗計算を使いこなせ
+import math
+a = math.factorial(5) # 5*4*3*2*1=120
+
+#37 順列の総数を返すscipy
+from scipy.special import perm
+
+print(perm(4, 2)) #12.0
+print(perm(4, 2, exact=True)) #12
+print(perm(4, 4, exact=True)) #24
+
+#38 Travel salesman problem
+def cal_cost(list1("道順"), list2("全ルートのcost")):
+
+    min = 0
+    for m in range(len(list1)):
+        total_cost = 0
+
+        for n in range(len(list1[0])-1): #lists = 0~3
+            total_cost += lists2[list1[m][n]-1][list1[m][n+1]-1]
+        if min == 0:
+            min = total_cost
+        else:
+            if total_cost < min:
+                min = total_cost
+    return min
+cal_cost([list1],[list2])
